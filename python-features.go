@@ -1,4 +1,4 @@
-package main
+package pythonFeatures
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func reverse(array interface{}) []interface{} {
+func reverse(array interface{}) (arr []interface{}) {
 	arr, ok := makeArray(array)
 
 	if !ok {
@@ -19,7 +19,7 @@ func reverse(array interface{}) []interface{} {
 		arr[fIndex], arr[lIndex] = arr[lIndex], arr[fIndex]
 	}
 
-	return arr
+	return
 
 }
 
@@ -45,22 +45,22 @@ func min(inputSlice interface{}) (minValue interface{}) {
 	return
 }
 
-func max(inputSlice interface{}) (minValue interface{}) {
+func max(inputSlice interface{}) (maxValue interface{}) {
 	arr, _ := makeArray(inputSlice)
 
 	switch valueType := arr[0].(type) {
 	case int:
 		finalSlice := inputSlice.([]int)
 		sort.Ints(finalSlice)
-		minValue = finalSlice[len(arr) - 1]
+		maxValue = finalSlice[len(arr) - 1]
 	case string:
 		finalSlice := inputSlice.([]string)
 		sort.Strings(finalSlice)
-		minValue = finalSlice[len(arr) - 1]
+		maxValue = finalSlice[len(arr) - 1]
 	case float64:
 		finalSlice := inputSlice.([]float64)
 		sort.Float64s(finalSlice)
-		minValue = finalSlice[len(arr) - 1]
+		maxValue = finalSlice[len(arr) - 1]
 	default:
 		panic(fmt.Sprintf("Unknown type %v", valueType))
 	}
