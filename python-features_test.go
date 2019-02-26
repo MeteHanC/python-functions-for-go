@@ -33,7 +33,33 @@ func TestReverse(t *testing.T) {
 	expectedInterface = append(expectedInterface, 2.50, "e", 3.50, 5, "d", 4, "b", "a", 3)
 
 	if !reflect.DeepEqual(reversedDummyInterface, expectedInterface) {
-		t.Errorf("Reversed string slice is not the same ;;; \n"+
+		t.Errorf("Reversed interface slice is not the same ;;; \n"+
 			" Expected : %v, \n Got : %v.", expectedInterface, reversedDummyInterface)
+	}
+}
+
+func TestMin(t *testing.T){
+	var dummyInt = []int{1,2,3,-1,-2,4,5,-6,7,-20}
+	minValue := min(dummyInt)
+	expectedValue := -20
+	if minValue != expectedValue{
+		t.Errorf("Minimum value of the int slice is incorrect ;;; \n"+
+			" Expected : %v, \n Got : %v.", expectedValue, minValue)
+	}
+
+	var dummyFloat = []float64{1.0, 2.0, 0.15, 0.04, 3.2, 0.015}
+	minValueFloat := min(dummyFloat)
+	expectedValueFloat := 0.015
+	if minValueFloat != expectedValueFloat{
+		t.Errorf("Minimum value of the int slice is incorrect ;;; \n"+
+			" Expected : %v, \n Got : %v.", expectedValueFloat, minValueFloat)
+	}
+
+	var dummyString = []string{"4", "1", "5", "0","6","7", "a", "b", "c", "dd"}
+	minValueString := min(dummyString)
+	expectedValueString := "0"
+	if minValueString != expectedValueString{
+		t.Errorf("Minimum value of the int slice is incorrect ;;; \n"+
+			" Expected : %v, \n Got : %v.", expectedValueString, minValueString)
 	}
 }
