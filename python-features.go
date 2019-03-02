@@ -7,12 +7,11 @@ import (
 )
 
 // Validation function, panics if given input is not type of slice
-func validate(array interface{})(arr []interface{}){
+func validate(array interface{}) (arr []interface{}) {
 	arr, ok := makeArray(array)
 
 	if !ok {
 		panic(fmt.Sprintf("Type %v is not an array. \n Expected: Any Array Type \n Got: %v", reflect.ValueOf(array).Kind(), reflect.ValueOf(array).Kind()))
-		return
 	}
 	return
 }
@@ -36,7 +35,6 @@ func reverse(array interface{}) (arr []interface{}) {
 // Panics if parameter's type is not known
 func min(inputSlice interface{}) (minValue interface{}) {
 	arr := validate(inputSlice)
-
 
 	switch valueType := arr[0].(type) {
 	case int:
@@ -68,15 +66,15 @@ func max(inputSlice interface{}) (maxValue interface{}) {
 	case int:
 		finalSlice := inputSlice.([]int)
 		sort.Ints(finalSlice)
-		maxValue = finalSlice[len(arr) - 1]
+		maxValue = finalSlice[len(arr)-1]
 	case string:
 		finalSlice := inputSlice.([]string)
 		sort.Strings(finalSlice)
-		maxValue = finalSlice[len(arr) - 1]
+		maxValue = finalSlice[len(arr)-1]
 	case float64:
 		finalSlice := inputSlice.([]float64)
 		sort.Float64s(finalSlice)
-		maxValue = finalSlice[len(arr) - 1]
+		maxValue = finalSlice[len(arr)-1]
 	default:
 		panic(fmt.Sprintf("Unknown type %v", valueType))
 	}
@@ -110,4 +108,3 @@ func takeArg(arg interface{}, kind reflect.Kind) (val reflect.Value, ok bool) {
 	}
 	return
 }
-

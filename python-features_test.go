@@ -81,7 +81,7 @@ func TestMin(t *testing.T) {
 			" Expected : %v, \n Got : %v.", expectedValueString, minValueString)
 	}
 
-	assertPanicMinMax(t, []float32{1,2,3,4}, min)
+	assertPanicMinMax(t, []float32{1, 2, 3, 4}, min)
 }
 
 func TestMax(t *testing.T) {
@@ -109,9 +109,9 @@ func TestMax(t *testing.T) {
 			" Expected : %v, \n Got : %v.", expectedValueString, maxValueString)
 	}
 
-	assertPanicMinMax(t, []float32{1,2,3,4}, max)
+	assertPanicMinMax(t, []float32{1, 2, 3, 4}, max)
 }
-func TestValidate(t *testing.T){
+func TestValidate(t *testing.T) {
 	assertPanic(t, 5, validate)
 }
 func TestTakeArg(t *testing.T) {
