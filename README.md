@@ -1,0 +1,2 @@
+# python-functions-for-go
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2d3d22a86a4241fe825b6c445549afc7)](https://app.codacy.com/app/MeteHanC/python-functions-for-go?utm_source=github.com&utm_medium=referral&utm_content=MeteHanC/python-functions-for-go&utm_campaign=Badge_Grade_Dashboard)
