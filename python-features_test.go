@@ -1,4 +1,4 @@
-package pygo_test
+package pygo
 
 import (
 	"fmt"
@@ -26,7 +26,7 @@ func assertPanicMinMax(t *testing.T, panicValue interface{}, f func(array interf
 
 func TestReverse(t *testing.T) {
 	var dummyIntSlice = []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
-	reversedDummyIntSlice := reverse(dummyIntSlice)
+	reversedDummyIntSlice := Reverse(dummyIntSlice)
 	var expectedInt []interface{}
 	expectedInt = append(expectedInt, 9, 8, 7, 6, 5, 4, 3, 2, 1)
 	fmt.Println(expectedInt)
@@ -37,7 +37,7 @@ func TestReverse(t *testing.T) {
 	}
 
 	var dummyStringSlice = []string{"a", "b", "c", "d"}
-	reversedDummyStringSlice := reverse(dummyStringSlice)
+	reversedDummyStringSlice := Reverse(dummyStringSlice)
 	var expectedString []interface{}
 	expectedString = append(expectedString, "d", "c", "b", "a")
 
@@ -48,7 +48,7 @@ func TestReverse(t *testing.T) {
 
 	var dummyInterface []interface{}
 	dummyInterface = append(dummyInterface, 3, "a", "b", 4, "d", 5, 3.50, "e", 2.50)
-	reversedDummyInterface := reverse(dummyInterface)
+	reversedDummyInterface := Reverse(dummyInterface)
 	var expectedInterface []interface{}
 	expectedInterface = append(expectedInterface, 2.50, "e", 3.50, 5, "d", 4, "b", "a", 3)
 
@@ -60,7 +60,7 @@ func TestReverse(t *testing.T) {
 
 func TestMin(t *testing.T) {
 	var dummyInt = []int{1, 2, 3, -1, -2, 4, 5, -6, 7, -20}
-	minValue := min(dummyInt)
+	minValue := Min(dummyInt)
 	expectedValue := -20
 	if minValue != expectedValue {
 		t.Errorf("Minimum value of the int slice is incorrect ;;; \n"+
@@ -68,7 +68,7 @@ func TestMin(t *testing.T) {
 	}
 
 	var dummyFloat = []float64{1.0, 2.0, 0.15, 0.04, 3.2, 0.015}
-	minValueFloat := min(dummyFloat)
+	minValueFloat := Min(dummyFloat)
 	expectedValueFloat := 0.015
 	if minValueFloat != expectedValueFloat {
 		t.Errorf("Minimum value of the float slice is incorrect ;;; \n"+
@@ -76,19 +76,19 @@ func TestMin(t *testing.T) {
 	}
 
 	var dummyString = []string{"4", "1", "5", "0", "6", "7", "a", "b", "c", "dd"}
-	minValueString := min(dummyString)
+	minValueString := Min(dummyString)
 	expectedValueString := "0"
 	if minValueString != expectedValueString {
 		t.Errorf("Minimum value of the string slice is incorrect ;;; \n"+
 			" Expected : %v, \n Got : %v.", expectedValueString, minValueString)
 	}
 
-	assertPanicMinMax(t, []float32{1, 2, 3, 4}, min)
+	assertPanicMinMax(t, []float32{1, 2, 3, 4}, Min)
 }
 
 func TestMax(t *testing.T) {
 	var dummyInt = []int{1, 2, 3, -1, -2, 4, 5, -6, 7, -20}
-	maxValue := max(dummyInt)
+	maxValue := Max(dummyInt)
 	expectedValue := 7
 	if maxValue != expectedValue {
 		t.Errorf("Maximum value of the int slice is incorrect ;;; \n"+
@@ -96,7 +96,7 @@ func TestMax(t *testing.T) {
 	}
 
 	var dummyFloat = []float64{1.0, 2.0, 0.15, 0.04, 3.2, 0.015}
-	maxValueFloat := max(dummyFloat)
+	maxValueFloat := Max(dummyFloat)
 	expectedValueFloat := 3.2
 	if maxValueFloat != expectedValueFloat {
 		t.Errorf("Maximum value of the float slice is incorrect ;;; \n"+
@@ -104,14 +104,14 @@ func TestMax(t *testing.T) {
 	}
 
 	var dummyString = []string{"4", "1", "5", "0", "6", "7", "a", "b", "c", "dd"}
-	maxValueString := max(dummyString)
+	maxValueString := Max(dummyString)
 	expectedValueString := "dd"
 	if maxValueString != expectedValueString {
 		t.Errorf("Maximum value of the string slice is incorrect ;;; \n"+
 			" Expected : %v, \n Got : %v.", expectedValueString, maxValueString)
 	}
 
-	assertPanicMinMax(t, []float32{1, 2, 3, 4}, max)
+	assertPanicMinMax(t, []float32{1, 2, 3, 4}, Max)
 }
 func TestValidate(t *testing.T) {
 	assertPanic(t, 5, validate)
