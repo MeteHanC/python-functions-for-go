@@ -6,15 +6,21 @@ import (
 	"sort"
 )
 
-// It reverses given array and returns it as an []interface
-// Could take any type as the array parameter however if the parameter is not a slice/array it will raise an error & panic
-func reverse(array interface{}) (arr []interface{}) {
+// Validation function, panics if given input is not type of slice
+func validate(array interface{})(arr []interface{}){
 	arr, ok := makeArray(array)
 
 	if !ok {
 		panic(fmt.Sprintf("Type %v is not an array. \n Expected: Any Array Type \n Got: %v", reflect.ValueOf(array).Kind(), reflect.ValueOf(array).Kind()))
-		return nil
+		return
 	}
+	return
+}
+
+// It reverses given array and returns it as an []interface
+// Could take any type as the array parameter however if the parameter is not a slice/array it will raise an error & panic
+func reverse(array interface{}) (arr []interface{}) {
+	arr = validate(array)
 
 	for fIndex, lIndex := 0, len(arr)-1; fIndex < lIndex; fIndex, lIndex = fIndex+1, lIndex-1 {
 		arr[fIndex], arr[lIndex] = arr[lIndex], arr[fIndex]
@@ -29,12 +35,7 @@ func reverse(array interface{}) (arr []interface{}) {
 // And finally find the minimum value by getting the index 0 since it will be the minimum value after sorting
 // Panics if parameter's type is not known
 func min(inputSlice interface{}) (minValue interface{}) {
-	arr, ok := makeArray(inputSlice)
-
-	if !ok {
-		panic(fmt.Sprintf("Type %v is not an array. \n Expected: Any Array Type \n Got: %v", reflect.ValueOf(arr).Kind(), reflect.ValueOf(arr).Kind()))
-		return nil
-	}
+	arr := validate(inputSlice)
 
 
 	switch valueType := arr[0].(type) {
@@ -61,12 +62,7 @@ func min(inputSlice interface{}) (minValue interface{}) {
 // And finally find the maximum value by getting the index 0 since it will be the maximum value after sorting
 // Panics if parameter's type is not known
 func max(inputSlice interface{}) (maxValue interface{}) {
-	arr, ok := makeArray(inputSlice)
-
-	if !ok {
-		panic(fmt.Sprintf("Type %v is not an array. \n Expected: Any Array Type \n Got: %v", reflect.ValueOf(arr).Kind(), reflect.ValueOf(arr).Kind()))
-		return nil
-	}
+	arr := validate(inputSlice)
 
 	switch valueType := arr[0].(type) {
 	case int:

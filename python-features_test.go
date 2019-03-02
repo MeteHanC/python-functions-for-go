@@ -5,16 +5,16 @@ import (
 	"testing"
 )
 
-func assertPanicReverse(t *testing.T, panicValue interface{}, f func(array interface{}) (arr []interface{})) {
+func assertPanic(t *testing.T, panicValue interface{}, f func(array interface{}) (arr []interface{})) {
 	defer func() {
 		if r := recover(); r == nil {
-			t.Errorf("The code did not panic as expected ;;; ")
+			t.Errorf("The code did not panic as the expected behaviour ;;; ")
 		}
 	}()
 	f(panicValue)
 }
 
-func assertPanic(t *testing.T, panicValue interface{}, f func(array interface{}) (arr interface{})) {
+func assertPanicMinMax(t *testing.T, panicValue interface{}, f func(array interface{}) (arr interface{})) {
 	defer func() {
 		if r := recover(); r == nil {
 			t.Errorf("The code did not panic as expected ;;; ")
@@ -54,8 +54,6 @@ func TestReverse(t *testing.T) {
 		t.Errorf("Reversed interface slice is not the same ;;; \n"+
 			" Expected : %v, \n Got : %v.", expectedInterface, reversedDummyInterface)
 	}
-
-	assertPanicReverse(t, 5, reverse)
 }
 
 func TestMin(t *testing.T) {
@@ -83,8 +81,7 @@ func TestMin(t *testing.T) {
 			" Expected : %v, \n Got : %v.", expectedValueString, minValueString)
 	}
 
-	assertPanic(t, 5, min)
-	assertPanic(t, []float32{1,2,3,4}, min)
+	assertPanicMinMax(t, []float32{1,2,3,4}, min)
 }
 
 func TestMax(t *testing.T) {
@@ -112,10 +109,11 @@ func TestMax(t *testing.T) {
 			" Expected : %v, \n Got : %v.", expectedValueString, maxValueString)
 	}
 
-	assertPanic(t, 5, max)
-	assertPanic(t, []float32{1,2,3,4}, max)
+	assertPanicMinMax(t, []float32{1,2,3,4}, max)
 }
-
+func TestValidate(t *testing.T){
+	assertPanic(t, 5, validate)
+}
 func TestTakeArg(t *testing.T) {
 	var dummyArg = []int{1, 2, 3}
 	slice, ok := takeArg(dummyArg, reflect.Slice)
