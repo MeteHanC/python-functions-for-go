@@ -5,6 +5,24 @@ import (
 	"testing"
 )
 
+func assertPanicReverse(t *testing.T, panicValue interface{}, f func(array interface{}) (arr []interface{})) {
+	defer func() {
+		if r := recover(); r == nil {
+			t.Errorf("The code did not panic as expected ;;; ")
+		}
+	}()
+	f(panicValue)
+}
+
+func assertPanic(t *testing.T, panicValue interface{}, f func(array interface{}) (arr interface{})) {
+	defer func() {
+		if r := recover(); r == nil {
+			t.Errorf("The code did not panic as expected ;;; ")
+		}
+	}()
+	f(panicValue)
+}
+
 func TestReverse(t *testing.T) {
 	var dummyIntSlice = []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
 	reversedDummyIntSlice := reverse(dummyIntSlice)
@@ -36,6 +54,8 @@ func TestReverse(t *testing.T) {
 		t.Errorf("Reversed interface slice is not the same ;;; \n"+
 			" Expected : %v, \n Got : %v.", expectedInterface, reversedDummyInterface)
 	}
+
+	assertPanicReverse(t, 5, reverse)
 }
 
 func TestMin(t *testing.T) {
@@ -62,6 +82,9 @@ func TestMin(t *testing.T) {
 		t.Errorf("Minimum value of the string slice is incorrect ;;; \n"+
 			" Expected : %v, \n Got : %v.", expectedValueString, minValueString)
 	}
+
+	assertPanic(t, 5, min)
+	assertPanic(t, []float32{1,2,3,4}, min)
 }
 
 func TestMax(t *testing.T) {
@@ -88,13 +111,37 @@ func TestMax(t *testing.T) {
 		t.Errorf("Maximum value of the string slice is incorrect ;;; \n"+
 			" Expected : %v, \n Got : %v.", expectedValueString, maxValueString)
 	}
+
+	assertPanic(t, 5, max)
+	assertPanic(t, []float32{1,2,3,4}, max)
 }
 
-func TestTakeArg(t *testing.T){
-	var dummyArg = []int{1,2,3}
+func TestTakeArg(t *testing.T) {
+	var dummyArg = []int{1, 2, 3}
 	slice, ok := takeArg(dummyArg, reflect.Slice)
-	if !ok || slice.Index(0).Kind() != reflect.Int{
+	if !ok || slice.Index(0).Kind() != reflect.Int {
 		t.Errorf("Unexpected takeArg function behaviour ;;; \n"+
 			" Expected : %v, \n Got : %v.", reflect.Int, slice.Index(0).Kind())
 	}
+
+	slice2, ok2 := takeArg(5, reflect.Slice)
+	if ok2 {
+		t.Errorf("Unexpected takeArg function behaviour, int is not type of slice ;;; \n"+
+			" Expected : %v, \n Got : %v.", reflect.Slice, slice2.Kind())
+	}
+}
+
+func TestMakeArray(t *testing.T) {
+	dummyArray, ok := makeArray(5)
+	if ok || dummyArray != nil {
+		t.Errorf("Given input is not an array therefore dummyArray should be nil ;;; \n"+
+			" Expected : %v, \n Got : %v.", nil, dummyArray)
+	}
+
+	dummyArray2, ok2 := makeArray([]int{1, 2, 3, 4, 5})
+	if !ok2 || reflect.ValueOf(dummyArray2).Kind() != reflect.Slice {
+		t.Errorf("Given input is a proper array, unexpected behaviour ;;; \n"+
+			" Expected : %v, \n Got : %v.", reflect.Slice, reflect.ValueOf(dummyArray2).Kind())
+	}
+
 }

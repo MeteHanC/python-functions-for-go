@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"reflect"
 	"sort"
-	"time"
 )
 
 // It reverses given array and returns it as an []interface
@@ -116,28 +115,3 @@ func takeArg(arg interface{}, kind reflect.Kind) (val reflect.Value, ok bool) {
 	return
 }
 
-func main() {
-	var numbers []int
-	for i := 0; i < 1000000; i++ {
-		numbers = append(numbers, i)
-	}
-
-	start := time.Now()
-	numbers = append(numbers, -1, -2, -3, 999999)
-	fmt.Println("Minimum of an array is ", max(numbers))
-	t := time.Now()
-	elapsed := t.Sub(start)
-	fmt.Println("Elapsed Time 1 : ", elapsed)
-
-	start = time.Now()
-
-	fmt.Println(reverse(numbers)[0])
-
-	t = time.Now()
-	elapsed = t.Sub(start)
-	fmt.Println("Elapsed Time 2 : ", elapsed)
-
-	fmt.Println(reverse([]string{"me", "te", "me", "te", "me", "te", "me", "te", "me", "te", "me", "te", "me", "te"}))
-	fmt.Println(reverse([]int{1, 2}))
-	fmt.Println(reverse([]float64{1.5, 2.5}))
-}
