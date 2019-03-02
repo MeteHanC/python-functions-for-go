@@ -7,6 +7,8 @@ import (
 	"time"
 )
 
+// It reverses given array and returns it as an []interface
+// Could take any type as the array parameter however if the parameter is not a slice/array it will raise an error & panic
 func reverse(array interface{}) (arr []interface{}) {
 	arr, ok := makeArray(array)
 
@@ -23,8 +25,18 @@ func reverse(array interface{}) (arr []interface{}) {
 
 }
 
+// Can take any type as the inputSlice parameter, however if the parameter is not a slice/array it will raise an error & panic
+// If the given parameter is an array/slice it will check which type of an array it is and then sort it by the type
+// And finally find the minimum value by getting the index 0 since it will be the minimum value after sorting
+// Panics if parameter's type is not known
 func min(inputSlice interface{}) (minValue interface{}) {
-	arr, _ := makeArray(inputSlice)
+	arr, ok := makeArray(inputSlice)
+
+	if !ok {
+		panic(fmt.Sprintf("Type %v is not an array. \n Expected: Any Array Type \n Got: %v", reflect.ValueOf(arr).Kind(), reflect.ValueOf(arr).Kind()))
+		return nil
+	}
+
 
 	switch valueType := arr[0].(type) {
 	case int:
@@ -45,8 +57,17 @@ func min(inputSlice interface{}) (minValue interface{}) {
 	return
 }
 
+// Can take any type as the inputSlice parameter, however if the parameter is not a slice/array it will raise an error & panic
+// If the given parameter is an array/slice it will check which type of an array it is and then sort it by the type
+// And finally find the maximum value by getting the index 0 since it will be the maximum value after sorting
+// Panics if parameter's type is not known
 func max(inputSlice interface{}) (maxValue interface{}) {
-	arr, _ := makeArray(inputSlice)
+	arr, ok := makeArray(inputSlice)
+
+	if !ok {
+		panic(fmt.Sprintf("Type %v is not an array. \n Expected: Any Array Type \n Got: %v", reflect.ValueOf(arr).Kind(), reflect.ValueOf(arr).Kind()))
+		return nil
+	}
 
 	switch valueType := arr[0].(type) {
 	case int:
@@ -67,6 +88,8 @@ func max(inputSlice interface{}) (maxValue interface{}) {
 	return
 }
 
+// Calls the takeArg func and if success bool is false return nil interface and false bool
+// If true, creates an []interface and maps the values from any type array to []interface
 func makeArray(array interface{}) (out []interface{}, ok bool) {
 	slice, success := takeArg(array, reflect.Slice)
 	if !success {
@@ -84,6 +107,7 @@ func makeArray(array interface{}) (out []interface{}, ok bool) {
 	return out, true
 }
 
+// Checks if given input is type of slice. If it is returns true, else it returns false as default
 func takeArg(arg interface{}, kind reflect.Kind) (val reflect.Value, ok bool) {
 	val = reflect.ValueOf(arg)
 	if val.Kind() == kind {
