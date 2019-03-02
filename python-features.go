@@ -1,4 +1,4 @@
-package pythonFeatures
+package pygo
 
 import (
 	"fmt"
@@ -18,7 +18,7 @@ func validate(array interface{}) (arr []interface{}) {
 
 // It reverses given array and returns it as an []interface
 // Could take any type as the array parameter however if the parameter is not a slice/array it will raise an error & panic
-func reverse(array interface{}) (arr []interface{}) {
+func Reverse(array interface{}) (arr []interface{}) {
 	arr = validate(array)
 
 	for fIndex, lIndex := 0, len(arr)-1; fIndex < lIndex; fIndex, lIndex = fIndex+1, lIndex-1 {
@@ -33,7 +33,7 @@ func reverse(array interface{}) (arr []interface{}) {
 // If the given parameter is an array/slice it will check which type of an array it is and then sort it by the type
 // And finally find the minimum value by getting the index 0 since it will be the minimum value after sorting
 // Panics if parameter's type is not known
-func min(inputSlice interface{}) (minValue interface{}) {
+func Min(inputSlice interface{}) (minValue interface{}) {
 	arr := validate(inputSlice)
 
 	switch valueType := arr[0].(type) {
@@ -59,7 +59,7 @@ func min(inputSlice interface{}) (minValue interface{}) {
 // If the given parameter is an array/slice it will check which type of an array it is and then sort it by the type
 // And finally find the maximum value by getting the index 0 since it will be the maximum value after sorting
 // Panics if parameter's type is not known
-func max(inputSlice interface{}) (maxValue interface{}) {
+func Max(inputSlice interface{}) (maxValue interface{}) {
 	arr := validate(inputSlice)
 
 	switch valueType := arr[0].(type) {

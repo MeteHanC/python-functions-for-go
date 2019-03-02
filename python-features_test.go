@@ -1,6 +1,7 @@
-package pythonFeatures
+package pygo_test
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -28,6 +29,7 @@ func TestReverse(t *testing.T) {
 	reversedDummyIntSlice := reverse(dummyIntSlice)
 	var expectedInt []interface{}
 	expectedInt = append(expectedInt, 9, 8, 7, 6, 5, 4, 3, 2, 1)
+	fmt.Println(expectedInt)
 
 	if !reflect.DeepEqual(reversedDummyIntSlice, expectedInt) {
 		t.Errorf("Reversed int slice is not the same ;;; \n"+
