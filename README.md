@@ -6,11 +6,13 @@
 # Python Functions For Go
 Some useful Python functions for Golang. Currently there are only 3; reverse, min, max
 
+
+
 ## Reverse
 It takes an array/slice of any type and reverses it and returns it as an []interface. Example usage;
 
-```
-pygo.Reverse( []int{1, 2, 3, 4, 5, 6, 7, 8, 9} )
+```go
+pygo.Reverse( []string{"1", "2", "3", "4", "5", "6", "7", "8", "9", "golang"} )
 ```
 Will give you an interface slice;
 
@@ -19,9 +21,9 @@ Will give you an interface slice;
 ```
 
 ## Min 
-Min function returns the smallest value of the given array/slice as an interface. Example usage;
+Min function returns the smallest value of the given array/slice of any type as an interface. Example usage;
 
-```
+```go
 pygo.Min([]int{1,6,-2,5,100,-10})
 ```
 Will return 
@@ -30,10 +32,10 @@ Will return
 ```
 
 ## Max
-Max function returns the largest value of the given array/slice as an interface. Example usage;
+Max function returns the largest value of the given array/slice of any type as an interface. Example usage;
 
-```
-pygo.Max([]int{1,6,-2,5,100,-10})
+```go
+pygo.Max([]float64{1,6,-2,5,100,-10})
 ```
 Will return
 ```
