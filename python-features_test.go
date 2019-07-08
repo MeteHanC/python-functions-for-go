@@ -9,7 +9,7 @@ import (
 func assertPanic(t *testing.T, panicValue interface{}, f func(array interface{}) (arr []interface{})) {
 	defer func() {
 		if r := recover(); r == nil {
-			t.Errorf("The code did not panic as the expected behaviour ;;; ")
+			t.Errorf("The code did not panic as the expected ;;; ")
 		}
 	}()
 	f(panicValue)

@@ -11,7 +11,7 @@ func validate(array interface{}) (arr []interface{}) {
 	arr, ok := makeArray(array)
 
 	if !ok {
-		panic(fmt.Sprintf("Type %v is not an array. \n Expected: Any Array Type \n Got: %v", reflect.ValueOf(array).Kind(), reflect.ValueOf(array).Kind()))
+		panic(fmt.Sprintf("Type %v is not an array. \n Expected: An Array Type \n Got: %v", reflect.ValueOf(array).Kind(), reflect.ValueOf(array).Kind()))
 	}
 	return
 }
